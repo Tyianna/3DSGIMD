@@ -117,20 +117,20 @@ def generate_smiles_nodes_edges_coords_graph_features(type, m):
 
 def normalize_adj(adj):
     row = []
-    for i in range(adj.shape[0]):  # 32
+    for i in range(adj.shape[0]):  
         sum = adj[i].sum()
         row.append(sum)
     rowsum = np.array(row)
-    d_inv_sqrt = np.power(rowsum, -0.5).flatten()  # 对rowsum求n次方
-    d_inv_sqrt[np.isinf(d_inv_sqrt)] = 0.   # 按元素测试它是+无穷还是-无穷大，还是不返回布尔数组的结果。
-    d_mat_inv_sqrt = sp.diags(d_inv_sqrt)  # sp.diags 从对角线构建一个稀疏矩阵
-    a = d_mat_inv_sqrt.dot(adj)  #矩阵乘法运算
+    d_inv_sqrt = np.power(rowsum, -0.5).flatten()  
+    d_inv_sqrt[np.isinf(d_inv_sqrt)] = 0.   
+    d_mat_inv_sqrt = sp.diags(d_inv_sqrt)  
+    a = d_mat_inv_sqrt.dot(adj)  
     return a
 
 def preprocess_adj(adj, norm=True, sparse=False):
-    adj = adj + np.eye(len(adj))  # 在原有特征的基础上在其对角线上添加1
+    adj = adj + np.eye(len(adj)) 
     if norm:
-        adj = normalize_adj(adj)  # 对称归一化邻接矩阵
+        adj = normalize_adj(adj) 
     return adj
 
 def create_adjacency(mol):
@@ -578,6 +578,7 @@ get_feature(test_dataset, save_path, dir_data, dataname='test_data')"""
 #     data = split[i]
 #     dir_data = f'{name}_3D_attr/{i}_data' 
 #     get_tdc_feature(save_path, dir_data, data)
+
     
   
 
